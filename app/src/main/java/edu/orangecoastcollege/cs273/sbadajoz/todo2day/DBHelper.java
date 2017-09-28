@@ -79,4 +79,34 @@ class DBHelper extends SQLiteOpenHelper {
         database.delete(DATABASE_TABLE, KEY_FIELD_ID + "=" + task.getID(), null);
         database.close();
     }
+
+    public void updateTask(Task task) {
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(FIELD_DESCRIPTION, task.getDescription());
+        values.put(FIELD_DONE, task.isDone() ? 1 : 0);
+        database.update(DATABASE_TABLE, values, KEY_FIELD_ID + "=" + task.getID(), null);
+
+        database.close();
+    }
+
+    public Task getSingleTask(int id) {
+        SQLiteDatabase database = getReadableDatabase();
+        Task task = null;
+        Cursor cursor = database.query(DATABASE_TABLE,
+                new String[]{KEY_FIELD_ID, FIELD_DESCRIPTION, FIELD_DONE},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if(cursor.getInt(0) == id)
+                task = new Task(cursor.getInt(0), cursor.getString(1), (cursor.getInt(2) == 1));
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return task;
+    }
 }
