@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        deleteDatabase(DBHelper.DATABASE_NAME);
+
         mAllTasksList.add(new Task("Study for CS 273 Midterm", false));
         mAllTasksList.add(new Task("Play League of Legends", true));
         mAllTasksList.add(new Task("Sleep at Some Point", false));
