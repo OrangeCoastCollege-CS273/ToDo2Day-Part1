@@ -28,7 +28,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String createTable = "CREATE TABLE " + DATABASE_NAME
+        String createTable = "CREATE TABLE " + DATABASE_TABLE
                 +" (" + KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
                 + FIELD_DESCRIPTION + " TEXT, "
                 + FIELD_DONE + " INTEGER" + ")";
@@ -42,7 +42,7 @@ class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addTast(Task newTask) {
+    public void addTask(Task newTask) {
         SQLiteDatabase database = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -68,7 +68,7 @@ class DBHelper extends SQLiteOpenHelper {
             }
             while(cursor.moveToNext());
         }
-        
+
         cursor.close();
         database.close();
         return taskList;
