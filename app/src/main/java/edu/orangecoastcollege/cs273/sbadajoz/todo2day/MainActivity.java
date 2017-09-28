@@ -34,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
         mAllTasksList = db.getAllTasks();
 
+        Log.i(TAG, "Showing all tasks:");
+        for (Task task : mAllTasksList) {
+            Log.i(TAG, task.toString());
+        }
+
+        Log.i(TAG, "After deleting task 4:");
+        db.deleteTask(mAllTasksList.get(3));
+
+        mAllTasksList = db.getAllTasks();
         for (Task task : mAllTasksList) {
             Log.i(TAG, task.toString());
         }
