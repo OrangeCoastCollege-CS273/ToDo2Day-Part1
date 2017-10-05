@@ -7,11 +7,25 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The sole activity of the program
+ * Holds no real UI or user value
+ *
+ * Used for log value only
+ */
 public class MainActivity extends AppCompatActivity {
     private List<Task> mAllTasksList = new ArrayList<>();
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
+    /**
+     * Called on activity creation
+     *
+     * Creates a number of tasks and executes methods of the {@link Task} class on them
+     *
+     * Outputs using the android monitor logs
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
