@@ -21,7 +21,13 @@ public class MainActivity extends AppCompatActivity {
 
     TaskListAdapter mAdapter;
 
-
+    /**
+     * Creates an instance of the activity
+     * Connects the Views to the backend
+     * Instantiates the {@link DBHelper}
+     *
+     * @param savedInstanceState A bundle of the saved state from last run if applicable
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         mDB = new DBHelper(this);
     }
 
+    /**
+     * Called on a resume of the activity
+     *
+     * Recalls all tasks from the database
+     * Connects the {@link TaskListAdapter}to the {@link ListView}
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -43,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         mTaskListView.setAdapter(mAdapter);
     }
 
+    /**
+     * Adds a {@link Task} to the {@link ListView}
+     * updates the database to match the {@link ListView}
+     *
+     * Creates toast if user did not input a description
+     *
+     * @param view The view which calls the method
+     */
     public void addTask(View view) {
         String mDescription = mDescriptionEditText.getText().toString();
         if (TextUtils.isEmpty(mDescription)) {
@@ -56,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Removes all {@link Task}s from the {@link ListView}
+     * Updates the adapter
+
+     * @param v View which calls the method
+     */
     public void clearAllTasks(View v) {
         mAllTasksList.clear();
         mAdapter.notifyDataSetChanged();
@@ -65,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Updates the completion value of a {@link Task}
+     * Then calls the {@link DBHelper} to update the database version of the {@link Task}
+
+     * @param view {@link CheckBox} which is checked to call the method
+     */
     public void updateTask(View view) {
         CheckBox checkBox = (CheckBox) view;
         Task selectedTask = (Task) checkBox.getTag();
